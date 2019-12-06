@@ -1,0 +1,13 @@
+#!/bin/bash -l
+
+module purge
+
+case ${VSC_INSTITUTE_CLUSTER} in
+    thinking)
+        module load Python/2.7.6-foss-2014a
+        ;;
+esac
+
+cd ${PBS_O_WORKDIR}
+
+mpirun ./ring.py

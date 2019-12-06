@@ -1,0 +1,4 @@
+*.lprof
+*.prof
+*.dat
+__pycache__

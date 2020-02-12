@@ -1,0 +1,15 @@
+name: python_for_hpc
+channels:
+  - defaults
+dependencies:
+  - numpy
+  - dask
+  - numba
+  - scipy
+  - swig
+  - line_profiler
+  - cython
+  - snakeviz
+  - mpi4py
+  - jupyterlab
+  - numexpr

@@ -14,3 +14,4 @@ What is it?
     is used to create a shared library and a wrapper.
 * `comp_pi_f2py.py`: test program to compute pi using a given number
     of iterations.
+* `Julia`: example of using Fortran OpenMP procedures from Python.

@@ -12,7 +12,7 @@ contains
         integer, dimension(:, :), intent(inout) :: n
         integer :: i, j
 
-        !$omp parallel do default(none) private(i) shared(z, n)
+        !$omp parallel do default(none) private(i) shared(z, n) schedule(runtime)
         do j = 1, size(z, 2)
             do i = 1, size(z, 1)
                 n(i, j) = julia_iterate(z(i, j))

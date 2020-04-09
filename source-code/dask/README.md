@@ -30,3 +30,4 @@ CSV or HDF5 files.
 * `dask_sum_aarays.py`: somewhat artificial example of a Dask computation
     on `numpy` arrays.
 * `dask_sum_aarays.pbs`: PBS script to execute `dask_sum_aarays.py`.
+* `julia_set`: example of combining Cython and dask.

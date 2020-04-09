@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+#PBS -l nodes=2:ppn=36
+#PBS -l walltime=00:30:00
+#PBS -m ae
+#PBS -M geertjan.bex@uhasselt.be
+
+cd $PBS_O_WORKDIR
+
+source "conda.sh"
+conda activate dask
+
+if [ $? -ne 0 ]
+then
+    (>&2 echo '### error: conda environment not sourced successfully' )
+fi
+
+scheduler_node=$(hostname)
+scheduler_port=8786
+scheduler="${scheduler_node}:${scheduler_port}"
+worker_nodes=$(uniq $PBS_NODEFILE)
+worker_launcher="$(pwd)/launch_worker.sh"
+
+echo "launching scheduler: ${scheduler}"
+./launch_scheduler.sh
+
+echo 'waitling till scheduler launched...'
+sleep 15
+
+echo 'starting workers...'
+for worker in $worker_nodes;
+do
+    echo "launching worker on ${worker}"
+    ssh $worker $worker_launcher "$(pwd)" "${scheduler}" "${PBS_JOBID}" &
+done
+
+echo 'waiting for workers to start and connect'
+sleep 15
+
+
+echo 'starting computation'
+
+time python julia_set_dask.py  --host ${scheduler_node} \
+                               --port ${scheduler_port} \
+                               --implementation cython 

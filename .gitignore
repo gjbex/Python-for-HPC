@@ -107,5 +107,9 @@ venv.bak/
 *~
 *.swp
 *.bak
-~$scientific_python.pptx
+
+# Powerpoint backup files
 ~$python_hpc.pptx
+
+# direnv files
+.envrc 

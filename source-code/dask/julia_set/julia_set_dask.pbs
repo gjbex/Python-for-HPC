@@ -7,7 +7,7 @@
 cd $PBS_O_WORKDIR
 
 source "conda.sh"
-conda activate dask
+conda activate python_for_hpc
 
 if [ $? -ne 0 ]
 then

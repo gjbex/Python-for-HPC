@@ -21,3 +21,4 @@ C/C++ or Fortran implementations.
 1. `mpi_count.py`: count amino acids in a long sequence, distributing
    the work over processes.
 1. `large_dna.txt`: example data file to use with `mpi_count.py`.
+1. `mpifitness.py`: application to tmie various MPI communications.

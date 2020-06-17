@@ -39,7 +39,7 @@ def pingpong(comm, nr_iters, msg_size):
                             print(f'{rank} received {msg}, expected {dest}',
                                   file=sys.stderr)
                             comm.Abort(1)
-                        print(f'{rank} -> {dest} pig-pong: {end_time - start_time}')
+                        print(f'{rank} -> {dest} pingpong: {end_time - start_time}')
                     if rank == dest:
                         start_time = time.time()
                         msg = comm.recv(source=source)
@@ -49,7 +49,7 @@ def pingpong(comm, nr_iters, msg_size):
                             print(f'{rank} received {msg}, expected {source}',
                                   file=sys.stderr)
                             comm.Abort(1)
-                        print(f'{rank} -> {source} ping-pong: {end_time - start_time}')
+                        print(f'{rank} -> {source} pingpong: {end_time - start_time}')
     comm.barrier()
                     
 

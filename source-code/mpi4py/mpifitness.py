@@ -187,7 +187,7 @@ def main():
     arg_parser.add_argument('--reduce_size', type=int, default=8,
                             help='number of bytes for reduce message')
     options = arg_parser.parse_args()
-    with open(f'{options.file_base}_{rank}.txt', 'w') as file:
+    with open(f'{options.file_base}_{rank:04d}.txt', 'w') as file:
         comm.barrier()
         if (rank == root):
             print(f'# {options.nr_pingpongs} ping-pong iterations, '

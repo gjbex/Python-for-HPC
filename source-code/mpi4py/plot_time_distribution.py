@@ -18,12 +18,16 @@ def main():
     arg_parser.add_argument('--bins', type=int, default=5,
                             help='number of bins in histogram')
     arg_parser.add_argument('--rug', action='store_true', help='show rug')
+    arg_parser.add_argument('--log', action='store_true', help='use log x-axis')
     options = arg_parser.parse_args()
     timings = accumulate(options.file)
     if options.rug:
-        sns.distplot(timings[options.test], rug=True, hist=False)
+        grid = sns.distplot(timings[options.test], rug=True, hist=False)
     else:
-        sns.distplot(timings[options.test], bins=options.bins)
+        grid = sns.distplot(timings[options.test], bins=options.bins)
+    if options.log:
+        grid.set(xscale='log')
+    grid.set(title=options.test)
     plt.show()
     return 0
 

@@ -15,19 +15,13 @@ def main():
                             choices=['pingpong', 'bcast', 'scatter', 'gather',
                                      'alltoall', 'reduce'],
                             help='test to visualize')
-    arg_parser.add_argument('--bins', type=int, default=5,
-                            help='number of bins in histogram')
-    arg_parser.add_argument('--rug', action='store_true', help='show rug')
     arg_parser.add_argument('--log', action='store_true', help='use log x-axis')
     options = arg_parser.parse_args()
     timings = accumulate(options.file)
-    data = timings[options.test][:, 1]
-    if options.rug:
-        grid = sns.distplot(data, rug=True, hist=False)
-    else:
-        grid = sns.distplot(data, bins=options.bins)
+    data = timings[options.test]
+    grid = sns.scatterplot(x=(data[:, 0] - data[0, 0]), y=data[:, 1], alpha=0.6)
     if options.log:
-        grid.set(xscale='log')
+        grid.set(yscale='log')
     grid.set(title=options.test)
     plt.show()
     return 0

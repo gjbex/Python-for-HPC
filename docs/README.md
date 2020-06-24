@@ -12,7 +12,7 @@ When you complete this training you will
     computing such as numpy, numexpr and numba;
   * be able to use Cython to improve your code's performance;
   * be able to wrap C, C++ and Fortran code to use it from Python;
-  * understand the opportunities and pitfalls of multithreaded
+  * understand the opportunities and pitfalls of multi-threaded
     programming with Python;
   * be able to write distributed application using MPI;
   * have an understanding of how frameworks for distributed
@@ -31,7 +31,7 @@ Total duration: 4 hours.
   | Cython                                      | 60 min.  |
   | coffee break                                | 10 min.  |
   | interfacing with C/C++/Fortran              | 30 min.  |
-  | multithreaded programming                   | 10 min.  |
+  | multi-threaded programming                   | 10 min.  |
   | MPI                                         | 45 min.  |
   | dask                                        | 15 min.  |
   | pyspark                                     | 20 min.  |
@@ -43,6 +43,12 @@ Total duration: 4 hours.
 Slides are available in the
  [GitHub repository](https://github.com/gjbex/Python-for-HPC),
 as well as example code and hands-on material.
+
+
+## Software environment
+
+Instructions on [how to create the required software environment](software_stack.md)
+are available.
 
 
 ## Target audience

@@ -18,11 +18,11 @@ def acknowledge(comm):
     comm.barrier()
     rank = comm.Get_rank()
     size = comm.Get_size()
-    print(f'process {rank} out of {size}')
+    print(f'acknowledge {rank} out of {size}')
     comm.barrier()
 
 
-def pingpong(comm, nr_iters, msg_size):
+def pingpong(comm, nr_iters, msg_size, file):
     comm.barrier()
     rank = comm.Get_rank()
     size = comm.Get_size()
@@ -39,7 +39,8 @@ def pingpong(comm, nr_iters, msg_size):
                             print(f'{rank} received {msg}, expected {dest}',
                                   file=sys.stderr)
                             comm.Abort(1)
-                        print(f'{rank} -> {dest} pingpong: {end_time - start_time}')
+                        print(f'pingpong {rank} -> {dest} {start_time}: '
+                              f'{end_time - start_time}', file=file)
                     if rank == dest:
                         start_time = time.time()
                         msg = comm.recv(source=source)
@@ -49,11 +50,12 @@ def pingpong(comm, nr_iters, msg_size):
                             print(f'{rank} received {msg}, expected {source}',
                                   file=sys.stderr)
                             comm.Abort(1)
-                        print(f'{rank} -> {source} pingpong: {end_time - start_time}')
+                        print(f'pingpong {rank} -> {source} {start_time}: '
+                              f'{end_time - start_time}', file=file)
     comm.barrier()
                     
 
-def broadcast(comm, nr_iters, msg_size):
+def broadcast(comm, nr_iters, msg_size, file):
     comm.barrier()
     rank = comm.Get_rank()
     size = comm.Get_size()
@@ -65,14 +67,15 @@ def broadcast(comm, nr_iters, msg_size):
             start_time = time.time()
             msg = comm.bcast(msg, root=root)
             end_time = time.time()
-            print(f'{root} -> {rank} bcast: {end_time - start_time}')
+            print(f'bcast {root} -> {rank} {start_time}: {end_time - start_time}',
+                  file=file)
             if msg != make_msg(root, msg_size):
                 print(f'{rank} received unexpected bcast message')
                 comm.Abort(2)
     comm.barrier()
 
 
-def scatter(comm, nr_iters, msg_size):
+def scatter(comm, nr_iters, msg_size, file):
     comm.barrier()
     rank = comm.Get_rank()
     size = comm.Get_size()
@@ -84,14 +87,15 @@ def scatter(comm, nr_iters, msg_size):
             start_time = time.time()
             msg = comm.scatter(msg, root=root)
             end_time = time.time()
-            print(f'{root} -> {rank} scatter: {end_time - start_time}')
+            print(f'scatter {root} -> {rank} {start_time}: {end_time - start_time}',
+                  file=file)
             if msg != make_msg(rank, msg_size):
                 print(f'{rank} received unexpected scatter message')
                 comm.Abort(2)
     comm.barrier()
 
 
-def gather(comm, nr_iters, msg_size):
+def gather(comm, nr_iters, msg_size, file):
     comm.barrier()
     rank = comm.Get_rank()
     size = comm.Get_size()
@@ -101,7 +105,8 @@ def gather(comm, nr_iters, msg_size):
             start_time = time.time()
             msg = comm.gather(msg, root=root)
             end_time = time.time()
-            print(f'{root} -> {rank} gather: {end_time - start_time}')
+            print(f'gather {root} -> {rank} {start_time}: {end_time - start_time}',
+                  file=file)
             if (rank == root):
                 if len(msg) != size:
                     print(f'{rank} received unexpected gather message')
@@ -113,7 +118,7 @@ def gather(comm, nr_iters, msg_size):
     comm.barrier()
 
 
-def alltoall(comm, nr_iters, msg_size):
+def alltoall(comm, nr_iters, msg_size, file):
     comm.barrier()
     rank = comm.Get_rank()
     size = comm.Get_size()
@@ -122,7 +127,7 @@ def alltoall(comm, nr_iters, msg_size):
         start_time = time.time()
         msg = comm.alltoall(msg)
         end_time = time.time()
-        print(f'{rank} alltoall: {end_time - start_time}')
+        print(f'alltoall {rank} {start_time}: {end_time - start_time}', file=file)
         if len(msg) != size:
             print(f'{rank} received unexpected alltoall message')
             comm.Abort(2)
@@ -133,7 +138,7 @@ def alltoall(comm, nr_iters, msg_size):
     comm.barrier()
 
 
-def reduce(comm, nr_iters, msg_size):
+def reduce(comm, nr_iters, msg_size, file):
     comm.barrier()
     rank = comm.Get_rank()
     size = comm.Get_size()
@@ -143,7 +148,8 @@ def reduce(comm, nr_iters, msg_size):
             start_time = time.time()
             msg = comm.reduce(msg, op=MPI.SUM, root=root)
             end_time = time.time()
-            print(f'{root} -> {rank} reduce: {end_time - start_time}')
+            print(f'reduce {root} -> {rank} {start_time}: {end_time - start_time}',
+                  file=file)
     comm.barrier()
 
 
@@ -155,6 +161,7 @@ def main():
         print(f'# acknowledgment')
     acknowledge(comm)
     arg_parser = ArgumentParser(description='MPI performance benchmark')
+    arg_parser.add_argument('file_base', help='base file name for performance info')
     arg_parser.add_argument('--nr_pingpongs', type=int, default=10,
                             help='number of ping-pong iterations to perform')
     arg_parser.add_argument('--pingpong_size', type=int, default=8,
@@ -180,43 +187,44 @@ def main():
     arg_parser.add_argument('--reduce_size', type=int, default=8,
                             help='number of bytes for reduce message')
     options = arg_parser.parse_args()
-    comm.barrier()
-    if (rank == root):
-        print(f'# {options.nr_pingpongs} ping-pong iterations, '
-              f'size {options.pingpong_size}')
-    comm.barrier()
-    pingpong(comm, options.nr_pingpongs, options.pingpong_size)
-    comm.barrier()
-    if (rank == root):
-        print(f'# {options.nr_bcasts} broadcast iterations, '
-              f'size {options.bcast_size}')
-    comm.barrier()
-    broadcast(comm, options.nr_bcasts, options.bcast_size)
-    comm.barrier()
-    if (rank == root):
-        print(f'# {options.nr_scatters} scatter iterations, '
-              f'size {options.scatter_size}')
-    comm.barrier()
-    scatter(comm, options.nr_scatters, options.scatter_size)
-    comm.barrier()
-    if (rank == root):
-        print(f'# {options.nr_gathers} gather iterations, '
-              f'size {options.gather_size}')
-    comm.barrier()
-    gather(comm, options.nr_gathers, options.gather_size)
-    comm.barrier()
-    if (rank == root):
-        print(f'# {options.nr_alltoalls} alltoall iterations, '
-              f'size {options.alltoall_size}')
-    comm.barrier()
-    alltoall(comm, options.nr_alltoalls, options.alltoall_size)
-    comm.barrier()
-    if (rank == root):
-        print(f'# {options.nr_reduces} reduce iterations, '
-              f'size {options.reduce_size}')
-    comm.barrier()
-    reduce(comm, options.nr_reduces, options.reduce_size)
-    comm.barrier()
+    with open(f'{options.file_base}_{rank:04d}.txt', 'w') as file:
+        comm.barrier()
+        if (rank == root):
+            print(f'# {options.nr_pingpongs} ping-pong iterations, '
+                  f'size {options.pingpong_size}', file=file)
+        comm.barrier()
+        pingpong(comm, options.nr_pingpongs, options.pingpong_size, file)
+        comm.barrier()
+        if (rank == root):
+            print(f'# {options.nr_bcasts} broadcast iterations, '
+                  f'size {options.bcast_size}', file=file)
+        comm.barrier()
+        broadcast(comm, options.nr_bcasts, options.bcast_size, file)
+        comm.barrier()
+        if (rank == root):
+            print(f'# {options.nr_scatters} scatter iterations, '
+                  f'size {options.scatter_size}', file=file)
+        comm.barrier()
+        scatter(comm, options.nr_scatters, options.scatter_size, file)
+        comm.barrier()
+        if (rank == root):
+            print(f'# {options.nr_gathers} gather iterations, '
+                  f'size {options.gather_size}', file=file)
+        comm.barrier()
+        gather(comm, options.nr_gathers, options.gather_size, file)
+        comm.barrier()
+        if (rank == root):
+            print(f'# {options.nr_alltoalls} alltoall iterations, '
+                  f'size {options.alltoall_size}', file=file)
+        comm.barrier()
+        alltoall(comm, options.nr_alltoalls, options.alltoall_size, file)
+        comm.barrier()
+        if (rank == root):
+            print(f'# {options.nr_reduces} reduce iterations, '
+                  f'size {options.reduce_size}', file=file)
+        comm.barrier()
+        reduce(comm, options.nr_reduces, options.reduce_size, file)
+        comm.barrier()
     return 0
 
 

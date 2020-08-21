@@ -69,3 +69,5 @@ be familiar with these as well.
 ## Trainer(s)
 
   * Geert Jan Bex ([geertjan.bex@uhasselt.be](mailto:geertjan.bex@uhasselt.be))
+
+![alt](pd_2020.png)

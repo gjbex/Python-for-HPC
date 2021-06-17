@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+#PBS -l nodes=2:ppn=36
+#PBS -l walltime=00:15:00
+
+module purge
+module load Python/3.7.2-foss-2018a
+module load HDF5/1.10.1-foss-2018a-lustre
+
+site_packages='python_lib/lib/python3.7/site-packages/'
+export PYTHONPATH="$site_packages:$PYTHONPATH"
+
+if [ -z "$PBS_O_WORKDIR" ]
+then
+    PBS_O_WORKDIR=$(pwd)
+fi
+
+cd $PBS_O_WORKDIR
+
+if  [ -z "$size" ]
+then
+    size=100
+fi
+
+if  [ -z "$slice" ]
+then
+    slice=10
+fi
+
+if [ -z "$file" ]
+then
+    file="data_$PBS_JOBID.h5"
+fi
+
+mpirun ./write.py  --size "$size"  --slice "$slice"  "$file"

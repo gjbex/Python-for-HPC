@@ -1,0 +1,44 @@
+# HDF5
+
+HDF5 is a very useful format for scientific data.  The library supports
+parallel I/O.  Here you will find a few examples of how to use the h5py
+library (one of the HDF5 wrapper libraries for Python) doing I/O in
+parallel.
+
+## Perrequisites
+
+Note that you need a parallel file system in order to do parallel I/O (lustre,
+IBM GPFS or IBM Spectrum Scale,...).
+
+Although conda-forge has versions of h5py ready for parallel I/O, that may not
+be your best choice on an HPC system.  The MPI libraries available on such
+systems have likely been tuned for better than out-of-the-box performance.
+An HDF5 library specifically optimized for your HPC system is also likely
+to significantly outperform a generic build.
+
+You need to be familiar with the HDF5 file format.  This is explained in
+some detail in the Scientific Python training.
+
+You also need a build of the HDF5 library that is capable of doing
+parallel I/O.  You can check this executing
+```bash
+$ h5cc -showconfig
+...
+Features:
+---------
+                   Parallel HDF5: yes
+...
+```
+If you have an HDF5 library ready for parallel I/O, you can easily
+install h5py so that it will use that library.  An example installation
+script (`install.sh`) is provided.  This assumes that you download the
+h5py source tarball.
+
+
+## What is it?
+
+1. `test.py`: very minimal test to check whehter h5py can do parallel I/O.
+1. `write.py`: application to benchmark parallel writes.  Each process
+   writes to its own section of a dataset in parallel.
+1. `write.pbs`: PBS job script to run `write.py`.
+1. `install.sh`: Bash script to do the h5py installation.

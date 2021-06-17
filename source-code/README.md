@@ -34,3 +34,4 @@ to create it.  There is some material not covered in the presentation as well.
 1. `profiling`: some illustrations and how-to on profiling a Python
    application.
 1. `pyspark`: illustrations of using PySpark.
+1. `hdf5`: examples of parallel I/O using HDF5.

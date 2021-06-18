@@ -22,3 +22,6 @@ C/C++ or Fortran implementations.
    the work over processes.
 1. `large_dna.txt`: example data file to use with `mpi_count.py`.
 1. `mpifitness.py`: application to tmie various MPI communications.
+1. `pi_mpipool.py`: illustration of using `mpi.futures.MPIPoolExecutor` to
+   compute the value of pi using a quadrature method.
+1. `run_pi_mpipool.sh`: Bash script to run `pi_mpipool.py`.

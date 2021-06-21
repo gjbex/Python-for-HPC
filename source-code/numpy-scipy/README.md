@@ -8,3 +8,5 @@ Some examples of numpy and scipy usage.  Mainly intended for benchmarking.
   an HDF5 file.  It computes the Singular Value Decomposition (SVD) and
   reconstructs the original matrix from that.  Timings for HDF5 reads,
   SVD and matrix multiplications are printed.
+1. `create_h5.py`: Python script to create an HDF5 file that can be used
+   by `svd.py`.

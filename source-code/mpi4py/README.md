@@ -25,3 +25,20 @@ C/C++ or Fortran implementations.
 1. `pi_mpipool.py`: illustration of using `mpi.futures.MPIPoolExecutor` to
    compute the value of pi using a quadrature method.
 1. `run_pi_mpipool.sh`: Bash script to run `pi_mpipool.py`.
+1. `file_trafficker.py`: file write/read test application that can run
+   serially, multi-threaded, multi-process and MPI.
+
+
+## How to run?
+
+The MPIPoolExecutor applications can be run using the command below for MPICH2:
+```bash
+$ mpiexec -n 1 -usize 3 ./file_trafficker.py --mode mpi ...
+```
+
+For Intel MPI/Open MPI:
+```bash
+$ mpiexec -n 3 python -m mpi4py.futures ./file_trafficker.py --mode mpi ...
+```
+
+This would run the application with 2 worker processes.

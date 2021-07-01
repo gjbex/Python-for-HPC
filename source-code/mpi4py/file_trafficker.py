@@ -7,6 +7,7 @@ import random
 import re
 import string
 import sys
+import time
 
 
 class SerialExecutor:
@@ -47,27 +48,37 @@ def compute_size(size_str):
 
 
 def create_file(args):
+    total_time = 0.0
     file_name, size, buffer_size = args
     with open(file_name, 'w') as file:
         for _ in range(size//buffer_size):
             buffer = ''.join(random.choices(string.ascii_lowercase, k=buffer_size))
+            start = time.time()
             file.write(buffer)
+            end = time.time()
+            total_time += end - start
         buffer = ''.join(random.choices(string.ascii_lowercase, k=(size % buffer_size)))
         file.write(buffer)
+    return total_time
 
 
 def read_file(args):
     file_name, buffer_size = args
     count = 0
     with open(file_name, 'r') as file:
+        start = time.time()
         while (buffer := file.read(buffer_size)):
             count += len(buffer)
-    return count
+        end = time.time()
+    return count, end - start
 
 
 def remove_file(file_name):
     file = pathlib.Path(file_name)
+    start = time.time()
     file.unlink()
+    end = time.time()
+    return end - start
 
 
 def main():
@@ -119,7 +130,8 @@ def main():
     if options.verbose:
         print(f'creating {len(files)} files', file=sys.stderr)
     with executor_cls() as executor:
-        executor.map(create_file, ((file_name, file_size, buffer_size) for file_name in files))
+        times = executor.map(create_file, ((file_name, file_size, buffer_size) for file_name in files))
+        print('\n'.join(f'write,{time},{file_size/time}' for time in times))
 
     # if requested, shuffle files so that they are handled by a different thread/process
     if options.shuffle:
@@ -129,8 +141,9 @@ def main():
     if options.verbose:
         print(f'reading {len(files)} files', file=sys.stderr)
     with executor_cls() as executor:
-        sizes = executor.map(read_file, ((file_name, buffer_size) for file_name in files))
-        for size in sizes:
+        results = executor.map(read_file, ((file_name, buffer_size) for file_name in files))
+        for size, time in results:
+            print(f'read,{time},{file_size/time}')
             if size != file_size:
                 print(f"problem for file '{file_name}': {size} bytes read, {file_size} expected",
                       file=sys.stderr)
@@ -144,7 +157,8 @@ def main():
         if options.verbose:
             print(f'reading {len(files)} files', file=sys.stderr)
         with executor_cls() as executor:
-            executor.map(remove_file, files)
+            times = executor.map(remove_file, files)
+            print('\n'.join(f'unlink,{time}' for time in times))
 
     if options.verbose:
         print('completed succesfully', file=sys.stderr)

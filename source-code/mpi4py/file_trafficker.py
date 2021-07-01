@@ -132,6 +132,9 @@ def main():
     # create file names
     files = [f'{options.basename}_{file_id:06d}' for file_id in range(options.nr_files)]
 
+    # print output header
+    print('operation,host,cpu_number,time_seconds,bytes_per_second')
+
     # create files
     if options.verbose:
         print(f'creating {len(files)} files', file=sys.stderr)
@@ -164,7 +167,7 @@ def main():
             print(f'reading {len(files)} files', file=sys.stderr)
         with executor_cls() as executor:
             results = executor.map(remove_file, files)
-            print('\n'.join(f'unlink,{location},{time}' for localtion, time in results))
+            print('\n'.join(f'unlink,{location},{time},' for localtion, time in results))
 
     if options.verbose:
         print('completed succesfully', file=sys.stderr)

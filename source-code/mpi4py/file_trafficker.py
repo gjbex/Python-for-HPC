@@ -3,8 +3,10 @@
 import argparse
 from functools import partial
 import pathlib
+import psutil
 import random
 import re
+import socket
 import string
 import sys
 import time
@@ -23,6 +25,10 @@ class SerialExecutor:
 
     def __exit__(self, exc_type, exc_value, exc_tb):
         pass
+
+
+def get_location():
+    return f'{socket.gethostname()},{psutil.Process().cpu_num()}'
 
 
 def compute_size(size_str):
@@ -59,7 +65,7 @@ def create_file(args):
             total_time += end - start
         buffer = ''.join(random.choices(string.ascii_lowercase, k=(size % buffer_size)))
         file.write(buffer)
-    return total_time
+    return get_location(), total_time
 
 
 def read_file(args):
@@ -70,7 +76,7 @@ def read_file(args):
         while (buffer := file.read(buffer_size)):
             count += len(buffer)
         end = time.time()
-    return count, end - start
+    return count, get_location(), end - start
 
 
 def remove_file(file_name):
@@ -78,7 +84,7 @@ def remove_file(file_name):
     start = time.time()
     file.unlink()
     end = time.time()
-    return end - start
+    return get_location(), end - start
 
 
 def main():
@@ -130,8 +136,8 @@ def main():
     if options.verbose:
         print(f'creating {len(files)} files', file=sys.stderr)
     with executor_cls() as executor:
-        times = executor.map(create_file, ((file_name, file_size, buffer_size) for file_name in files))
-        print('\n'.join(f'write,{time},{file_size/time}' for time in times))
+        results = executor.map(create_file, ((file_name, file_size, buffer_size) for file_name in files))
+        print('\n'.join(f'write,{location},{time},{file_size/time}' for location, time in results))
 
     # if requested, shuffle files so that they are handled by a different thread/process
     if options.shuffle:
@@ -142,8 +148,8 @@ def main():
         print(f'reading {len(files)} files', file=sys.stderr)
     with executor_cls() as executor:
         results = executor.map(read_file, ((file_name, buffer_size) for file_name in files))
-        for size, time in results:
-            print(f'read,{time},{file_size/time}')
+        for size, location, time in results:
+            print(f'read,{location},{time},{file_size/time}')
             if size != file_size:
                 print(f"problem for file '{file_name}': {size} bytes read, {file_size} expected",
                       file=sys.stderr)
@@ -157,8 +163,8 @@ def main():
         if options.verbose:
             print(f'reading {len(files)} files', file=sys.stderr)
         with executor_cls() as executor:
-            times = executor.map(remove_file, files)
-            print('\n'.join(f'unlink,{time}' for time in times))
+            results = executor.map(remove_file, files)
+            print('\n'.join(f'unlink,{location},{time}' for localtion, time in results))
 
     if options.verbose:
         print('completed succesfully', file=sys.stderr)

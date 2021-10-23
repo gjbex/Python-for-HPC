@@ -27,7 +27,8 @@ C/C++ or Fortran implementations.
 1. `run_pi_mpipool.sh`: Bash script to run `pi_mpipool.py`.
 1. `file_trafficker.py`: file write/read test application that can run
    serially, multi-threaded, multi-process and MPI.
-
+1. `mpi_io.py`: timing of MPI-IO operations.
+1. `translate_bin.py`: translate binary to ASCII data.
 
 ## How to run?
 

@@ -12,3 +12,5 @@ can be obtained without much effort.
 1. `Primes`: code to compute the first n prime numbers comparing a pure Python
     implementation with numba JIT and eager JIT.
 1. `Ufunc`: defining a numpy ufunc using numba.
+1. `numba_parallel.ipynb`: jupyter notebook experimenting with numba's
+   parallel capabilities.

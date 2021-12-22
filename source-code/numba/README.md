@@ -14,3 +14,4 @@ can be obtained without much effort.
 1. `Ufunc`: defining a numpy ufunc using numba.
 1. `numba_parallel.ipynb`: jupyter notebook experimenting with numba's
    parallel capabilities.
+1. `computing_pi.ipynb`: jupyter notebook illustrating speedup by numba.

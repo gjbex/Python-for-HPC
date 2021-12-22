@@ -44,3 +44,4 @@ to create it.  There is some material not covered in the presentation as well.
 1. `pypy`: code to experiment with the Pypy interpreter.
 1. `file-formats`: influcence of file formats on performance.
 1. `gpu`: some examples of using GPUs.
+1. `performance`: general considerations about performance.

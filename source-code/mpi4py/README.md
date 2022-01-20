@@ -21,4 +21,25 @@ C/C++ or Fortran implementations.
 1. `mpi_count.py`: count amino acids in a long sequence, distributing
    the work over processes.
 1. `large_dna.txt`: example data file to use with `mpi_count.py`.
-1. `mpifitness.py`: application to tmie various MPI communications.
+1. `mpifitness.py`: application to time various MPI communications.
+1. `pi_mpipool.py`: illustration of using `mpi.futures.MPIPoolExecutor` to
+   compute the value of pi using a quadrature method.
+1. `run_pi_mpipool.sh`: Bash script to run `pi_mpipool.py`.
+1. `file_trafficker.py`: file write/read test application that can run
+   serially, multi-threaded, multi-process and MPI.
+1. `mpi_io.py`: timing of MPI-IO operations.
+1. `translate_bin.py`: translate binary to ASCII data.
+
+## How to run?
+
+The MPIPoolExecutor applications can be run using the command below for MPICH2:
+```bash
+$ mpiexec -n 1 -usize 3 ./file_trafficker.py --mode mpi ...
+```
+
+For Intel MPI/Open MPI:
+```bash
+$ mpiexec -n 3 python -m mpi4py.futures ./file_trafficker.py --mode mpi ...
+```
+
+This would run the application with 2 worker processes.

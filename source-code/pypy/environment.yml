@@ -1,0 +1,7 @@
+name: pypy
+channels:
+  - defaults
+dependencies:
+  - pypy
+  - numpy
+prefix: /home/gjb/miniconda3/envs/pypy

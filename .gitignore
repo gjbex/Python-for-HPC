@@ -113,3 +113,4 @@ venv.bak/
 
 # direnv files
 .envrc 
+/~$python_for_hpc.pptx

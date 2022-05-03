@@ -65,9 +65,9 @@ if __name__ == '__main__':
         print(f'rank {rank}, left = {left}, up = {up}, right = {right}, down = {down}')
     # note that the column data is stored non-contiguously, and has to be copied
     # before sending it
-    send_buffer = np.array(matrix[:, 0])
+    send_buffer = np.array(matrix[:, 0]).copy()
     cart_comm.Sendrecv(send_buffer, left, recvbuf=right_halo, source=right)
-    send_buffer = np.array(matrix[:, -1])
+    send_buffer = np.array(matrix[:, -1]).copy()
     cart_comm.Sendrecv(send_buffer, right, recvbuf=left_halo, source=left)
     # row data is contiguous and can be used as a sendbuffer without copying
     cart_comm.Sendrecv(matrix[0, :], up, recvbuf=lower_halo, source=down)

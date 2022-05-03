@@ -3,6 +3,7 @@
 This is source code that is either used in the presentation, or was developed
 to create it.  There is some material not covered in the presentation as well.
 
+
 ## Requirements
 
 * Python version: at least 3.6
@@ -17,6 +18,10 @@ to create it.  There is some material not covered in the presentation as well.
   * pytables
   * jupyter
   * ipywidgets
+
+* For the GPU code:
+  * pycuda
+  * scikit-cuda
 
 
 ## What is it?
@@ -39,3 +44,4 @@ to create it.  There is some material not covered in the presentation as well.
 1. `pypy`: code to experiment with the Pypy interpreter.
 1. `file-formats`: influcence of file formats on performance.
 1. `gpu`: some examples of using GPUs.
+1. `performance`: general considerations about performance.

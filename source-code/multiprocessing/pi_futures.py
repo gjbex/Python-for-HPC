@@ -19,7 +19,7 @@ def partial_pi(args=(1000, )):
     return 4.0*nr_hits/nr_tries
 
 
-def compute_pi(nr_tries=10000, pool_size=None, constructor=None):
+def compute_pi(nr_tries=10000, pool_size=1, constructor=None):
     if not constructor:
         executor = ProcessPoolExecutor(max_workers=pool_size)
     else:
@@ -27,8 +27,6 @@ def compute_pi(nr_tries=10000, pool_size=None, constructor=None):
     args = [(nr_tries//pool_size, )
             for _ in range(pool_size)]
     results = executor.map(partial_pi, args)
-    if not pool_size:
-        pool_size = multiprocessing.cpu_count()
     return sum(results)/pool_size
 
 
@@ -37,21 +35,29 @@ def main():
     arg_parser.add_argument('--p', dest='pool_size', type=int,
                             default=1, help='pool size')
     arg_parser.add_argument('--n', dest='nr_tries', type=int,
-                            default=1, help='number of tries')
+                            default=1000, help='number of tries')
     arg_parser.add_argument('--t', default='processes', dest='type',
                             choices=['processes', 'threads'],
                             help='Either use processes or treads')
+    arg_parser.add_argument('--verbose', action='store_true',
+                            help='generate verbose output')
     options = arg_parser.parse_args()
-    if options.type:
-        if options.type == 'processes':
-            constructor = ProcessPoolExecutor
-        else:
-            constructor = ThreadPoolExecutor
-        my_pi = compute_pi(options.nr_tries, options.pool_size, constructor)
+    if options.nr_tries//options.pool_size == 0:
+        print(f'#error: too little work, increase --n value to at least '
+              f'{options.pool_size}',
+              file=sys.stderr)
+        sys.exit(1)
+    if options.type == 'processes':
+        constructor = ProcessPoolExecutor
     else:
-        my_pi = compute_pi(options.nr_tries, options.pool_size)
-    print('computed pi = {0:.15f}'.format(my_pi))
-    print('exact pi    = {0:.15f}'.format(math.pi))
+        constructor = ThreadPoolExecutor
+    if options.verbose:
+        print(f'# running using {options.pool_size} {options.type} on '
+              f'{multiprocessing.cpu_count()} logical cores',
+              file=sys.stderr)
+    my_pi = compute_pi(options.nr_tries, options.pool_size, constructor)
+    print(f'computed pi = {my_pi:.15f}')
+    print(f'exact pi    = {math.pi:.15f}')
     return 0
 
 if __name__ == '__main__':

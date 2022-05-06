@@ -2,19 +2,21 @@ name: python_for_hpc
 channels:
   - defaults
 dependencies:
+  - mpi4py
+  - python
+  - cython
+  - h5py
+  - numexpr
+  - scipy
+  - pandas
+  - swig
+  - dask
+  - numpy
+  - jupyterlab
   - bokeh
   - click
-  - cython
-  - dask
-  - h5py
-  - jupyterlab
-  - mpi4py
   - numba
-  - numexpr
-  - numpy
-  - pandas
-  - python
-  - scipy
   - snakeviz
-  - swig
+  - memory_profiler
+  - matplotlib
 prefix: /home/gjb/miniconda3/envs/python_for_hpc

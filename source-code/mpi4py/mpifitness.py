@@ -158,7 +158,7 @@ def main():
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
     if (rank == root):
-        print(f'# acknowledgment')
+        print('# acknowledgment')
     acknowledge(comm)
     arg_parser = ArgumentParser(description='MPI performance benchmark')
     arg_parser.add_argument('file_base', help='base file name for performance info')

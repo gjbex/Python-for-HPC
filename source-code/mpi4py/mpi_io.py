@@ -8,25 +8,26 @@ import time
 
 
 def compute_size(size_str):
-    if (match := re.match(r'\s*(\d+)\s*([a-z]+)?', size_str, re.IGNORECASE)) is not None:
-        size = int(match.group(1))
-        if match.group(2):
-            units = match.group(2).lower()
-            if units == 'b':
-                pass
-            elif units == 'kb':
-                size *= 1024
-            elif units == 'mb':
-                size *= 1024**2
-            elif units == 'gb':
-                size *= 1024**3
-            elif units == 'tb':
-                size *= 1024**4
-            else:
-                raise ValueError(f"invalid unit in size expression: '{size_str}'")
-        return size
-    else:
+    if (
+        match := re.match(r'\s*(\d+)\s*([a-z]+)?', size_str, re.IGNORECASE)
+    ) is None:
         raise ValueError(f"invalid size expression: '{size_str}'")
+    size = int(match[1])
+    if match[2]:
+        units = match[2].lower()
+        if units == 'b':
+            pass
+        elif units == 'kb':
+            size *= 1024
+        elif units == 'mb':
+            size *= 1024**2
+        elif units == 'gb':
+            size *= 1024**3
+        elif units == 'tb':
+            size *= 1024**4
+        else:
+            raise ValueError(f"invalid unit in size expression: '{size_str}'")
+    return size
 
 
 if __name__ == '__main__':

@@ -9,7 +9,7 @@ import sys
 
 def read_data(data_set, data_size, offset, slice_size, comm, is_verbose=True):
     total = 0.0
-    for slice_nr in range(data_size//slice_size):
+    for _ in range(data_size//slice_size):
         total += np.sum(data_set[offset:offset + slice_size])
         offset += slice_size
     if data_size % slice_size != 0:

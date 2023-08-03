@@ -8,23 +8,19 @@ import sys
 
 def accumulate(data_file):
     regex = re.compile(r'^([a-z]+).+?(\d+\.\d+):\s+(\d+(?:\.\d+)(?:e[+-]\d+)?)')
-    timings = dict()
-    times = dict()
+    timings = {}
+    times = {}
     for line in data_file:
-        match = regex.search(line)
-        if match:
-            test = match.group(1)
-            time = float(match.group(2))
-            duration = float(match.group(3))
+        if match := regex.search(line):
+            test = match[1]
+            time = float(match[2])
+            duration = float(match[3])
             if test not in timings:
-                timings[test] = list()
-                times[test] = list()
+                timings[test] = []
+                times[test] = []
             timings[test].append(duration)
             times[test].append(time)
-    data = dict()
-    for test in timings:
-        data[test] = np.array([times[test], timings[test]]).T
-    return data
+    return {test: np.array([times[test], timings[test]]).T for test in timings}
 
 
 def print_stats(test, data):

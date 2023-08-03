@@ -51,15 +51,16 @@ class AutomatonRunner:
                                 
     def evolve(self, automaton, nr_generations):
         generations = [automaton]
-        for _ in range(nr_generations):
-            generations.append(self.next_generation(generations[-1]))
+        generations.extend(
+            self.next_generation(generations[-1]) for _ in range(nr_generations)
+        )
         return generations
     
     def __str__(self):
-        auto_str = ''
-        for i, result in enumerate(self._rules):
-            auto_str += f'{i//4 % 2}{i//2 % 2}{i % 2} -> {result}\n'
-        return auto_str
+        return ''.join(
+            f'{i // 4 % 2}{i // 2 % 2}{i % 2} -> {result}\n'
+            for i, result in enumerate(self._rules)
+        )
 
 
 def automaton2str(automaton):

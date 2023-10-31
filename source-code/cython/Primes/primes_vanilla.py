@@ -1,8 +1,5 @@
-from array import array
-
-
 def primes(kmax):
-    p = array('i', [0]*1000)
+    p = [0]*1000
     result = []
     if kmax > 1000:
         kmax = 1000

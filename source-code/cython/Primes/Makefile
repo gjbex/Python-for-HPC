@@ -1,11 +1,12 @@
-VERSION = cpython-34m
-PRIMES_LIB = primes_cython.$(VERSION).so
+VERSION = cpython-311-x86_64-linux-gnu
+PRIMES_LIBS = primes_cython.$(VERSION).so primes_pure_python.$(VERSION).so
 
-all: $(PRIMES_LIB)
+all: $(PRIMES_LIBS)
 
-$(PRIMES_LIB): primes_cython.pyx
+$(PRIMES_LIBS): primes_cython.pyx primes_pure_python.py
 	python setup.py build_ext --inplace
 
 clean:
 	python setup.py clean
-	rm -f primes_cython.c $(PRIMES_LIB)
+	$(RM) primes_cython.c primes_pure_python.c $(PRIMES_LIBS)
+	$(RM) -r build/

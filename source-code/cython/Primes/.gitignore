@@ -1,1 +1,3 @@
 primes_cython.c
+primes_cython3.c
+primes_pure_python.c

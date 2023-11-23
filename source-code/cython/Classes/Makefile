@@ -1,11 +1,12 @@
 VERSION = cpython-311-x86_64-linux-gnu
-PRIMES_LIB = primes_cython.$(VERSION).so
+POINTS_LIB = points.$(VERSION).so
+POINTS_PURE_LIB = points_pure.$(VERSION).so
 
-all: $(PRIMES_LIB)
+all: $(POINTS_LIB)
 
-$(PRIMES_LIB): points.pyx
+$(POINTS_LIB): points.pyx points_pure.py
 	python setup.py build_ext --inplace
 
 clean:
 	python setup.py clean
-	$(RM) primes_cython.c $(PRIMES_LIB)
+	$(RM) points.c points_pure.c $(POINTS_LIB) $(POINTS_PURE_LIB)

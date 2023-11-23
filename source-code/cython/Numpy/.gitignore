@@ -2,3 +2,5 @@ build
 *.so
 array_init.c
 array_sum.c
+array_init_pure.c
+array_sum_pure.c

@@ -1,3 +1,4 @@
 build
 *.so
+array_init.c
 array_sum.c

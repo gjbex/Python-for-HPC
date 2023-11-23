@@ -1,4 +1,4 @@
-VERSION = cpython-34m
+VERSION = cpython-311-x86_64-linux-gnu
 ARRAY_SUM_LIB = array_sum.$(VERSION).so
 ARRAY_INIT_LIB = array_init.$(VERSION).so
 PROFILE = array_sums_prof.txt

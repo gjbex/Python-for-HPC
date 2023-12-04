@@ -12,4 +12,11 @@ Illustration of using Cython extension types (aka cdef classes).
 1. `driver.py`: Python script that uses both classes.
 1. `setup.py`: Python installation file to build the Cython
    extension.
+1. `distances_cython.py`: Python script to compute distances between
+   points using Cython class.
+1. `distances_python.py`: Python script to compute distances between
+   points using Python class.
+1. `distances_internal.py`: Python script to compute distances between
+   points using Cython class, computing the distances using a static
+   class method..
 1. `Makefile`: make file to build the extension.

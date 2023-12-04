@@ -6,6 +6,9 @@ Illustration of using Cython extension types (aka cdef classes).
 
 1. `points.pyx`: implementation of a cdef class, and a Python
    child class thereof.
+1. `points_pure.py`: implementation in Cython's pure Python
+   syntax.
+1. `points_python.py`: Python implementation of the class.
 1. `driver.py`: Python script that uses both classes.
 1. `setup.py`: Python installation file to build the Cython
    extension.

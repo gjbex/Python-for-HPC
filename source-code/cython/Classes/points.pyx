@@ -1,27 +1,27 @@
-from math import sqrt
+from libc.math cimport sqrt
 
 cdef class Point:
     
-    cdef double x, y
+    cdef double _x, _y
     
     def __init__(self, x, y):
-        self.x = x
-        self.y = y
+        self._x = x
+        self._y = y
         
-    def distance(self):
-        return sqrt(self.x**2 + self.y**2)
+    cpdef distance(self, other):
+        return sqrt((self._x - other._x)**2 + (self._y - other._y)**2)
     
     property x:
         def __get__(self):
-            return self.x
+            return self._x
         def __set__(self, value):
-            self.x = float(value)
+            self._x = float(value)
             
     property y:
         def __get__(self):
-            return self.y
+            return self._y
         def __set__(self, value):
-            self.y = float(value)            
+            self._y = float(value)            
 
 
 class ColoredPoint(Point):

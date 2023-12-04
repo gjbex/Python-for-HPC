@@ -10,6 +10,9 @@ Motivating example for using Cython
 1. `primes_pure_python.py`: Cython pure Python implementation of the
    primes function.
 1. `setup.py`: Python build script.
+1. `primes_malloc.pyx`: illustration of using `malloc` in Cython.
+1. `primes_pure_malloc.pyx`: illustration of using `malloc` in Cython's
+   pure Python syntax.
 1. `Makefile`: make file to build the extension.
 1. `time_all.sh`: timings with hyperfine, **Note:** due to short runtimes
    these timings are donated by Python interpreter startup times and

@@ -1,9 +1,8 @@
-from functools import reduce
 import numpy as np
 
 
 def cons(dims):
-    array = np.empty(reduce(lambda x, y: x*y, dims, 1))
+    array = np.empty(np.prod(dims))
     _cons(memoryview(array))
     return array.reshape(dims)
 

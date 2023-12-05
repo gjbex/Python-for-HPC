@@ -4,5 +4,5 @@ from distutils.core import setup
 from Cython.Build import cythonize
 
 setup(
-    ext_modules=cythonize("hello_world.pyx")
+    ext_modules=cythonize("hello_world.pyx", compiler_directives={'language_level' : "3"})
 )

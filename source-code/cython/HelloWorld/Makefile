@@ -1,4 +1,4 @@
-VERSION = cpython-34m
+VERSION = cpython-311-x86_64-linux-gnu
 HELLO_WORLD_LIB = hello_world.$(VERSION).so
 
 all: $(HELLO_WORLD_LIB)
@@ -8,4 +8,5 @@ $(HELLO_WORLD_LIB): hello_world.pyx
 
 clean:
 	python setup.py clean
-	rm -f hello_world.c $(HELLO_WORLD_LIB)
+	$(RM)  $(HELLO_WORLD_LIB) hello_world.c
+	$(RM) -r build

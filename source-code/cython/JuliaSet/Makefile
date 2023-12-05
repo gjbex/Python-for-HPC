@@ -9,4 +9,5 @@ $(JULIA_LIB): $(PYX_FILES)
 
 clean:
 	python setup.py clean
-	rm -f $(C_FILES)  $(JULIA_LIB)
+	$(RM) -f $(C_FILES)  $(JULIA_LIB)
+	$(RM) -r build/

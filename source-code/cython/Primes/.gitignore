@@ -2,3 +2,4 @@ primes_cython.c
 primes_cython3.c
 primes_pure_python.c
 primes_malloc.c
+primes_pure_malloc.c

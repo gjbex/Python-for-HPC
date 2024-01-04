@@ -1,11 +1,16 @@
-VERSION = cpython-34m
-POINT_LIB = point.$(VERSION).so
+VERSION = cpython-311-x86_64-linux-gnu
+CYTHON_LIB = point_cython.$(VERSION).so
+PURE_LIB = point_pure.$(VERSION).so
 
-all: $(POINT_LIB)
+all: $(CYTHON_LIB) $(PURE_LIB)
 
-$(POINT_LIB): point.pyx
+$(CYTHON_LIB): point_cython.pyx
+	python setup.py build_ext --inplace
+
+$(PURE_LIB): point_pure.py
 	python setup.py build_ext --inplace
 
 clean:
 	python setup.py clean
-	rm -f point.c $(POINT_LIB)
+	$(RM) point_cython.c point_pure.c $(CYTHON_LIB) $(PURE_LIB)
+	$(RM) -r build

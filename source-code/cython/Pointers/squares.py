@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import pointers
+import pointers_cython as pointers
 
 
 print(pointers.squares(5))

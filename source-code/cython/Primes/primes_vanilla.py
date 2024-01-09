@@ -1,17 +1,15 @@
-def primes(kmax):
-    p = [0]*1000
-    result = []
-    if kmax > 1000:
-        kmax = 1000
-    k = 0
+def primes(nr_primes):
+    primes = [0]*1000
+    if nr_primes > 1000:
+        nr_primes = 1000
     n = 2
-    while k < kmax:
-        i = 0
-        while i < k and n % p[i] != 0:
-            i = i + 1
-        if i == k:
-            p[k] = n
-            k = k + 1
-            result.append(n)
-        n = n + 1
-    return result
+    nr_found = 0
+    while nr_found < nr_primes:
+        for prime in primes[:nr_found]:
+            if n % prime == 0:
+                break
+        else:
+            primes[nr_found] = n
+            nr_found += 1
+        n += 1
+    return primes[:nr_found]

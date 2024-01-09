@@ -1,29 +1,21 @@
 import cython
+import sys
 
-def primes(nb_primes: cython.int):
-    i: cython.int
-    p: cython.int[1000]
-
-    if nb_primes > 1000:
-        nb_primes = 1000
-
-    if not cython.compiled:  # Only if regular Python is running
-        p = [0] * 1000       # Make p work almost like a C array
-
-    len_p: cython.int = 0  # The current number of elements in p.
+def primes(nr_primes: cython.int):
+    primes: cython.int[1000]
+    if nr_primes > 1000:
+        nr_primes = 1000
+    if not cython.compiled:
+        primes = [0] * 1000
+        print('fall back on Python', file=sys.stderr)
     n: cython.int = 2
-    while len_p < nb_primes:
-        # Is n prime?
-        for i in p[:len_p]:
-            if n % i == 0:
+    nr_found: cython.int = 0
+    while nr_found < nr_primes:
+        for prime in primes[:nr_found]:
+            if n % prime == 0:
                 break
-
-        # If no break occurred in the loop, we have a prime.
         else:
-            p[len_p] = n
-            len_p += 1
+            primes[nr_found] = n
+            nr_found += 1
         n += 1
-
-    # Let's copy the result into a Python list:
-    result_as_list = [prime for prime in p[:len_p]]
-    return result_as_list
+    return [prime for prime in primes[:nr_found]]

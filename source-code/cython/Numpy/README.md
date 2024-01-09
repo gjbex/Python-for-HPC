@@ -24,3 +24,5 @@ to `np.sum`.
    the pure Python Cython implementation of the array sum.
 1. `Makefile`: make file for building the cython extension and profiling
     the three implementations.
+1. `Convolution`: illustration of using numpy arrays directly in Cython
+   code.

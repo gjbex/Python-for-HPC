@@ -17,6 +17,6 @@ def primes(nr_primes: cython.int):
             primes[nr_found] = n
             nr_found += 1
         n += 1
-    result = [prime for prime in primes[:nr_found]]
+    result = list(primes[:nr_found])
     free(primes)
     return result

@@ -8,38 +8,38 @@
 
 class Statistics {
     private:
-        std::string _name;
-        size_t _n;
-        double _sum;
-        double _sum2;
-        double _min;
-        double _max;
-        size_t _nr_missing;
+        std::string name_;
+        size_t n_;
+        double sum_;
+        double sum2_;
+        double min_;
+        double max_;
+        size_t nr_missing_;
         void check() const;
-        double sum2() const { check(); return _sum2; };
+        double sum2() const { check(); return sum2_; };
         double mean2() const { check(); return sum2()/n(); };
     public:
         Statistics() :
-            _name {""}, _n {0}, _sum {0.0}, _sum2 {0.0},
-            _min {std::numeric_limits<double>::max()},
-            _max {-std::numeric_limits<double>::max()},
-           _nr_missing {0} {};
-        Statistics(const std::string& name) : Statistics() {
-            _name = name;
+            name_ {""}, n_ {0}, sum_ {0.0}, sum2_ {0.0},
+            min_ {std::numeric_limits<double>::max()},
+            max_ {-std::numeric_limits<double>::max()},
+           nr_missing_ {0} {};
+        explicit Statistics(const std::string& name) : Statistics() {
+            name_ = name;
         };
-        const std::string& name() const { return _name; };
-        size_t n() const { return _n; };
+        const std::string& name() const { return name_; };
+        size_t n() const { return n_; };
         void add(const double value);
         void add(const std::string& str);
-        double sum() const { check(); return _sum; };
-        double min() const { check(); return _min; };
-        double max() const { check(); return _max; };
+        double sum() const { check(); return sum_; };
+        double min() const { check(); return min_; };
+        double max() const { check(); return max_; };
         double mean() const { check(); return sum()/n(); };
         double stddev() const {
             check();
             return sqrt((sum2() - sum()*sum()/n())/(n() - 1));
         };
-        size_t nr_missing() const { return _nr_missing; };
+        size_t nr_missing() const { return nr_missing_; };
         friend std::ostream& operator<<(std::ostream& out,
                                         const Statistics& stats);
 };

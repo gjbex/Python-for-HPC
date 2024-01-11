@@ -1,0 +1,9 @@
+name: pybind11
+channels:
+  - conda-forge
+dependencies:
+  - pybind11
+  - numpy
+  - ca-certificates
+  - openssl
+prefix: /home/gjb/mambaforge/envs/pybind11

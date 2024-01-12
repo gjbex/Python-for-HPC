@@ -28,7 +28,7 @@ to create it.  There is some material not covered in the presentation as well.
 
 1. `cython`: illustrations of how to use Cython to speed up Python.
 1. `dask`: examples of how to use dask for distributed computing.
-1. `interfaciing-c-c++-fortran`: illustrations of ctypes, SWIG and
+1. `interfacing-c-c++-fortran`: illustrations of ctypes, SWIG and
    f2py to interface with C, C++ and Fortran code.
 1. `ising`: example of speeding up a Python simulation by wrapping
    C++ code using SWIG.

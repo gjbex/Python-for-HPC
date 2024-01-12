@@ -1,4 +1,4 @@
-VERSION = cpython-35m-x86_64-linux-gnu
+VERSION = $(shell python3-config --extension-suffix)
 
 QUAD_LIBS = quad.$(VERSION).so quad_prof.$(VERSION).so \
             quad_prof_indiv.$(VERSION).so
@@ -10,4 +10,4 @@ all: $(QUAD_LIBS)
 
 clean:
 	python setup.py clean
-	rm -f *.c $(QUAD_LIBS)
+	$(RM) *.c $(QUAD_LIBS)

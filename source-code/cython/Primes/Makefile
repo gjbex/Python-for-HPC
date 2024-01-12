@@ -1,4 +1,4 @@
-VERSION = cpython-311-x86_64-linux-gnu
+VERSION = $(shell python3-config --extension-suffix)
 PRIMES_LIBS = primes_cython.$(VERSION).so primes_cython3.$(VERSION).so \
 			  primes_pure_python.$(VERSION).so primes_pure_malloc.$(VERSION).so \
 			  primes_malloc.$(VERSION).so

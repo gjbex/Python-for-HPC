@@ -1,6 +1,6 @@
-VERSION = cpython-311-x86_64-linux-gnu
-AVERAGE_LIB = average.$(VERSION).so
-AVERAGE_PURE_LIB = average_pure.$(VERSION).so
+VERSION = $(shell python3-config --extension-suffix)
+AVERAGE_LIB = average$(VERSION)
+AVERAGE_PURE_LIB = average_pure$(VERSION)
 
 all: $(AVERAGE_LIB) $(AVERAGE_PURE_LIB)
 

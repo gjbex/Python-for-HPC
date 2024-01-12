@@ -9,4 +9,4 @@ $(LIB_FILES): $(PYX_FILES)
 
 clean:
 	python setup.py clean
-	rm -f $(C_FILES)  $(LIB_FILES)
+	$(RM) $(C_FILES)  $(LIB_FILES)

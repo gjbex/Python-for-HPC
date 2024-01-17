@@ -1,4 +1,5 @@
 add_subdirectory(convolution)
+add_subdirectory(bindings)
 
 add_executable(test_convolution.exe
         test_convolution.cpp)

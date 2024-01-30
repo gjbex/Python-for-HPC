@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <pybind11/pybind11.h>
 #include <pybind11/numpy.h>
 #include <statistics.h>
@@ -7,9 +8,8 @@ namespace py = pybind11;
 Statistics compute_stats(py::array_t<double> data) {
     Statistics stats;
     auto data_info = data.request();
-    ssize_t n = 1;
-    for (const auto& size: data_info.shape)
-        n *= size;
+    ssize_t n = std::accumulate(data_info.shape.begin(), data_info.shape.end(),
+                                1, std::multiplies<ssize_t>());
     for (ssize_t i = 0; i < n; ++i)
         stats.add(((double*) data_info.ptr)[i]);
     return stats;

@@ -1,4 +1,4 @@
-VERSION = cpython-311-x86_64-linux-gnu
+VERSION = $(shell python3-config --extension-suffix)
 CYTHON_LIB = point_cython.$(VERSION).so
 PURE_LIB = point_pure.$(VERSION).so
 

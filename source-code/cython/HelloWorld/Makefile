@@ -1,4 +1,4 @@
-VERSION = cpython-311-x86_64-linux-gnu
+VERSION = $(sheel python3-config --extension-suffix)
 HELLO_WORLD_LIB = hello_world.$(VERSION).so
 
 all: $(HELLO_WORLD_LIB)

@@ -8,13 +8,13 @@ void Statistics::check() const {
 }
 
 void Statistics::add(const double value) {
-    _n++;
-    _sum += value;
-    _sum2 += value*value;
+    n_++;
+    sum_ += value;
+    sum2_ += value*value;
     if (value < min())
-        _min = value;
+        min_ = value;
     if (value > max())
-        _max = value;
+        max_ = value;
 }
 
 void Statistics::add(const std::string& str) {
@@ -22,7 +22,7 @@ void Statistics::add(const std::string& str) {
         double value {std::stod(str)};
         add(value);
     } catch (std::invalid_argument&) {
-        _nr_missing++;
+        nr_missing_++;
     }
 }
 

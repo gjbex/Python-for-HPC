@@ -1,6 +1,6 @@
-VERSION = cpython-311-x86_64-linux-gnu
-POINTS_LIB = points.$(VERSION).so
-POINTS_PURE_LIB = points_pure.$(VERSION).so
+VERSION = $(shell python3-config --extension-suffix)
+POINTS_LIB = points$(VERSION)
+POINTS_PURE_LIB = points_pure$(VERSION)
 
 all: $(POINTS_LIB)
 

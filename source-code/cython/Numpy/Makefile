@@ -1,4 +1,4 @@
-VERSION = cpython-311-x86_64-linux-gnu
+VERSION = $(shell python3-config --extension-suffix)
 ARRAY_SUM_LIB = array_sum.$(VERSION).so
 ARRAY_INIT_LIB = array_init.$(VERSION).so
 ARRAY_SUM_PURE_LIB = array_sum_pure.$(VERSION).so

@@ -1,14 +1,21 @@
 VERSION = $(shell python3-config --extension-suffix)
-PRIMES_LIBS = primes_cython.$(VERSION).so primes_cython3.$(VERSION).so \
-			  primes_pure_python.$(VERSION).so primes_pure_malloc.$(VERSION).so \
-			  primes_malloc.$(VERSION).so
+SRC_FILES = primes_cython.pyx \
+			primes_malloc.pyx \
+			primes_pure_python.py \
+			primes_pure_malloc.py
+PRIMES_LIBS = $(addsuffix $(VERSION), $(basename $(SRC_FILES)))
+C_FILES = $(addsuffix .c, $(basename $(SRC_FILES)))
 
 all: $(PRIMES_LIBS)
 
-$(PRIMES_LIBS): primes_cython.pyx primes_pure_python.py
+%$(VERSION): %.pyx
+	python setup.py build_ext --inplace
+
+%$(VERSION): %.py
 	python setup.py build_ext --inplace
 
 clean:
 	python setup.py clean
-	$(RM) primes_cython.c primes_cython3.c primes_pure_python.c primes_malloc.c $(PRIMES_LIBS)
+	$(RM) $(PRIMES_LIBS)
+	$(RM) $(C_FILES)
 	$(RM) -r build/

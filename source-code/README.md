@@ -41,6 +41,7 @@ to create it.  There is some material not covered in the presentation as well.
 1. `pypy`: code to experiment with the Pypy interpreter.
 1. `file-formats`: influcence of file formats on performance.
 1. `performance`: general considerations about performance.
+1. `convolution`: wrap up exercise to apply all techniques.
 
 **Note:** the GPU code in this repository was moved to
 [its own repository](https://github.com/gjbex/Python-on-GPUs)

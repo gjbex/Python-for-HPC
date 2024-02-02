@@ -44,3 +44,5 @@ h5py source tarball.
    and computes the sum of the values.
 1. `write.pbs`: PBS job script to run `write.py`.
 1. `install.sh`: Bash script to do the h5py installation.
+1. `h5py.ipynb`: Jupyter notebook illustrating the use of the h5py
+   module.

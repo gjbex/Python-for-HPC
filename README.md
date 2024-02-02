@@ -4,6 +4,9 @@ GitHub repository for participants of the "Python for HPC" training.
 For information on the training, see the website
 [https://gjbex.github.io/Python-for-HPC/](https://gjbex.github.io/Python-for-HPC/)
 
+Note that material for a training on using GPUs in Python is in
+[another repository](https://github.com/gjbex/Python-on-GPUs).
+
 
 ## What is it?
 

@@ -18,3 +18,5 @@ Note that material for a training on using GPUs in Python is in
 1. [Contributing](CONTRIBUTING.md): information on how to contribute to this
    repository.
 1. docs: directory containing the website for this repository.
+1. [Code of conduct](CODE_OF_CONDUCT.md): when participating in this training
+   you accept to abide by the code of conduct.

@@ -10,6 +10,7 @@ to create it.  There is some material not covered in the presentation as well.
 * Packages (names listed taht can be used with `pip` or `conda` to install):
   * cython
   * dask
+  * numba
   * numpy
   * numexpr
   * scipy
@@ -18,10 +19,6 @@ to create it.  There is some material not covered in the presentation as well.
   * pytables
   * jupyter
   * ipywidgets
-
-* For the GPU code:
-  * pycuda
-  * scikit-cuda
 
 
 ## What is it?
@@ -43,5 +40,8 @@ to create it.  There is some material not covered in the presentation as well.
 1. `numpy-scipy`: some numpy/scipy codes for benchmakring.
 1. `pypy`: code to experiment with the Pypy interpreter.
 1. `file-formats`: influcence of file formats on performance.
-1. `gpu`: some examples of using GPUs.
 1. `performance`: general considerations about performance.
+1. `convolution`: wrap up exercise to apply all techniques.
+
+**Note:** the GPU code in this repository was moved to
+[its own repository](https://github.com/gjbex/Python-on-GPUs)

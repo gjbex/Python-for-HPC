@@ -6,7 +6,7 @@ int main() {
     Matrix image(10, 10);
     for (int i = 0; i < image.rows(); ++i) {
         for (int j = 0; j < image.cols(); ++j) {
-            image(i, j) = i*image.cols() + j;
+            image(i, j) = 1.0;
         }
     }
 
@@ -17,7 +17,7 @@ int main() {
     Matrix kernel(3, 3);
     for (int i = 0; i < kernel.rows(); ++i) {
         for (int j = 0; j < kernel.cols(); ++j) {
-            kernel(i, j) = 1.0/(kernel.rows()*kernel.cols());
+            kernel(i, j) = 1.0;
         }
     }
 

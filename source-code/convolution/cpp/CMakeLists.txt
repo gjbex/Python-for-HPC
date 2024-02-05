@@ -7,4 +7,6 @@ set(CMAKE_CXX_EXTENSIONS NO)
 
 add_compile_options(-Wall -Wextra -Wpedantic)
 
+enable_testing()
+
 add_subdirectory(src)

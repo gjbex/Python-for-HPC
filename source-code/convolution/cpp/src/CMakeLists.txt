@@ -11,6 +11,9 @@ if(Catch2_FOUND)
         PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/convolution)
     target_link_libraries(test_convolution.exe
         PRIVATE convolution)
+
+    add_test(NAME convolution
+        COMMAND test_convolution.exe)
 else()
     message(STATUS "Catch2 not found, tests will not be built")
 endif()

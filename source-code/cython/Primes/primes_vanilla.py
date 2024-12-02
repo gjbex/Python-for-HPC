@@ -1,7 +1,6 @@
 def primes(nr_primes):
     primes = [0]*1000
-    if nr_primes > 1000:
-        nr_primes = 1000
+    nr_primes = min(nr_primes, 1000)
     n = 2
     nr_found = 0
     while nr_found < nr_primes:

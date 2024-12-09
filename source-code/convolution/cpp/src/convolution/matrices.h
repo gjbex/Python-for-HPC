@@ -12,7 +12,7 @@ struct Matrix {
         std::unique_ptr<double[]> data_;
     public:
         Matrix(int rows, int cols) :
-            rows_(rows), cols_(cols), data_(new double[rows * cols]) {}
+            rows_(rows), cols_(cols), data_(new double[rows*cols]) {}
         // copy constructor & assignment operator
         Matrix(const Matrix& other);
         Matrix& operator=(const Matrix& other);
@@ -20,11 +20,13 @@ struct Matrix {
         Matrix(Matrix&& other) noexcept;
         Matrix& operator=(Matrix&& other) noexcept;
         // matrix indexing by row and column
-        double& operator()(int i, int j) { return data_[i * cols_ + j]; }
-        double operator()(int i, int j) const { return data_[i * cols_ + j]; }
+        double& operator()(int i, int j) { return data_[i*cols_ + j]; }
+        double operator()(int i, int j) const { return data_[i*cols_ + j]; }
         // getters for number of rows and columns
         int rows() const { return rows_; }
         int cols() const { return cols_; }
+        bool operator==(const Matrix& other) const;
+        bool operator!=(const Matrix& other) const { return !(*this == other); }
         // accessors for the data
         double* data() { return data_.get(); }
         const double* data() const { return data_.get(); }

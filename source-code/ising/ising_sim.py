@@ -17,7 +17,7 @@ if __name__ == '__main__':
     arg_parser.add_argument('--H', type=float, default=0.0,
                             help='magnetic field')
     arg_parser.add_argument('--T', default='1.5',
-                            help='temerature in units k_b, can be '
+                            help='temperature in units k_b, can be '
                                  'a comma-separated list')
     arg_parser.add_argument('--steps', type=int, default=1000,
                             help='number of simulation steps')

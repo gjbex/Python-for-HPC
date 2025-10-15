@@ -7,6 +7,18 @@ import numpy as np
 from runner import UnknownQuantityError
 
 
+def _do_run(args):
+    run_nr, is_verbose, runner, ising = args
+    if is_verbose > 0:
+        sys.stderr.write('# run {0:d}\n'.format(run_nr))
+    runner.set_system(ising)
+    runner.run()
+    quantities = {}
+    for quantity in runner.quantities():
+        quantities[quantity] = runner.get(quantity)
+    return quantities
+
+
 class Averager(object):
 
     def __init__(self, runner, ising, is_verbose=1):
@@ -20,19 +32,13 @@ class Averager(object):
         self._pool = multiprocessing.Pool(nr_cpus)
 
     def average(self, runs):
-        def do_run(run_nr, averager):
-            if averager._is_verbose > 0:
-                msg = '# run {0:d}\n'.format(run_nr)
-                sys.stderr.write(msg)
-            runner = averager._runner.clone()
-            runner.set_system(averager._ising.clone())
-            runner.run()
-            quantities = {}
-            for quantity in runner.quantities():
-                quantities[quantity] = runner.get(quantity)
-            return quantities
-        run_input = [(run, self) for run in range(1, runs + 1)]
-        results = self._pool.map(do_run, run_input)
+        run_input = []
+        for run in range(1, runs + 1):
+            runner = self._runner.clone()
+            ising = self._ising.clone()
+            runner.set_system(ising)
+            run_input.append((run, self._is_verbose, runner, ising))
+        results = self._pool.map(_do_run, run_input)
         for result in results:
             for quantity in result:
                 if quantity not in self.quantities():

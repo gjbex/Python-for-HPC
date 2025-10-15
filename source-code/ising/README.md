@@ -16,8 +16,8 @@ Simulation of a 2D Ising system with an emphasis on visualization.
 1. `ising_linear.py`: alternative implementation (inferior to the
     default Python) to be a more fair comparison with the C++
     implementation.
-1. `ising.py`: pure Python implmentation of the 2D Ising system.
-1. `ising_sim.py`: dirver for running simulations to cmopute relevant
+1. `ising.py`: pure Python implementation of the 2D Ising system.
+1. `ising_sim.py`: driver for running simulations to compute relevant
     ensemble averages.  Can switch between implementation for timing
     comparisons.
 1. `runner.py`: various runner implementation that execute s single run of

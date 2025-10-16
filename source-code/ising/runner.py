@@ -64,7 +64,8 @@ class BaseRunner(object):
         self.reset()
 
     def clone(self):
-        return BaseRunner(self._ising, self._steps, self._is_verbose)
+        return BaseRunner(ising=None, steps=self._steps,
+                          is_verbose=self._is_verbose)
 
     def set_system(self, ising):
         self._ising = ising
@@ -122,8 +123,9 @@ class SingleRunner(BaseRunner):
         self._data_fmt = '{0:d} {1:.4f} {2:.4f}\n'
 
     def clone(self):
-        return SingleRunner(self._ising, self._steps, self._file_name,
-                            self._is_verbose)
+        return SingleRunner(ising=None, steps=self._steps,
+                            file_name=self._file_name,
+                            is_verbose=self._is_verbose)
 
     def _prologue(self):
         if self._file_name:
@@ -159,8 +161,10 @@ class MovieRunner(BaseRunner):
         self._file_fmt = file_fmt
 
     def clone(self):
-        return MovieRunner(self._ising, self._steps, self._dir_name,
-                           self._file_fmt, self._is_verbose)
+        return MovieRunner(ising=None, steps=self._steps,
+                           dir_name=self._dir_name,
+                           file_fmt=self._file_fmt,
+                           is_verbose=self._is_verbose)
 
     def _prologue(self):
         if not os.path.exists(self._dir_name):
@@ -233,8 +237,8 @@ class ActivityHeatmapRunner(BaseRunner):
         self._burn_in = burn_in
 
     def clone(self):
-        return ActivityHeatmapRunner(self._ising, self._steps,
-                                     self._is_verbose)
+        return ActivityHeatmapRunner(ising=None, steps=self._steps,
+                                     is_verbose=self._is_verbose)
 
     def _prologue(self):
         self._quantities['heatmap'] = np.zeros((self._ising.N(),
@@ -260,9 +264,12 @@ class EquilibriumRunner(BaseRunner):
         self._max_slope = max_slope
 
     def clone(self):
-        return EquilibriumRunner(self._ising, self._steps, self._is_verbose,
-                                 self._burn_in, self._sample_period,
-                                 self._window, self._max_slope)
+        return EquilibriumRunner(ising=None, steps=self._steps,
+                                 is_verbose=self._is_verbose,
+                                 burn_in=self._burn_in,
+                                 sample_period=self._sample_period,
+                                 window=self._window,
+                                 max_slope=self._max_slope)
 
     def _prologue(self):
         self._t = []
@@ -321,9 +328,12 @@ class DomainSizeRunner(EquilibriumRunner):
                                                window, max_slope)
 
     def clone(self):
-        return DomainSizeRunner(self._ising, self._steps, self._is_verbose,
-                                self._burn_in, self._sample_period,
-                                self._window, self._max_slope)
+        return DomainSizeRunner(ising=None, steps=self._steps,
+                                is_verbose=self._is_verbose,
+                                burn_in=self._burn_in,
+                                sample_period=self._sample_period,
+                                window=self._window,
+                                max_slope=self._max_slope)
 
     def _prologue(self):
         super(DomainSizeRunner, self)._prologue()

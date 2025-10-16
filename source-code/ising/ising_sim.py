@@ -75,7 +75,7 @@ if __name__ == '__main__':
                                   sample_period=options.sample_period,
                                   window=options.window)
         averager = Averager(runner, ising, is_verbose=options.verbose - 1)
-        averager.average(options.runs)
+        averager.average(options.runs, base_seed=seed)
         M_values = averager.get('M mean')
         M_str = val_fmt.format(**M_values)
         E_values = averager.get('E mean')

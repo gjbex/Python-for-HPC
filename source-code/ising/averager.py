@@ -8,7 +8,11 @@ from runner import UnknownQuantityError
 
 
 def _do_run(args):
-    run_nr, is_verbose, runner, ising = args
+    run_nr, is_verbose, runner, ising_spec = args
+    ising_cls, ctor_args, base_seed = ising_spec
+    ising = ising_cls(*ctor_args)
+    if base_seed is not None:
+        ising.init_random(base_seed + run_nr - 1)
     if is_verbose > 0:
         sys.stderr.write('# run {0:d}\n'.format(run_nr))
     runner.set_system(ising)
@@ -31,13 +35,15 @@ class Averager(object):
             sys.stderr.write('# using {0:d} cores\n'.format(nr_cpus))
         self._pool = multiprocessing.Pool(nr_cpus)
 
-    def average(self, runs):
+    def average(self, runs, base_seed=None):
         run_input = []
+        ctor_args = (self._ising.N(), self._ising.J(),
+                     self._ising.H(), self._ising.T())
+        ising_spec = (self._ising.__class__, ctor_args, base_seed)
         for run in range(1, runs + 1):
             runner = self._runner.clone()
-            ising = self._ising.clone()
-            runner.set_system(ising)
-            run_input.append((run, self._is_verbose, runner, ising))
+            runner.set_system(None)  # Avoid shipping non-picklable backends.
+            run_input.append((run, self._is_verbose, runner, ising_spec))
         results = self._pool.map(_do_run, run_input)
         for result in results:
             for quantity in result:

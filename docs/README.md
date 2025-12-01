@@ -64,6 +64,14 @@ familiarity with C/C++.  This is not a training that starts from scratch.
 If you plan to do Python programming in a Linux or HPC environment you should
 be familiar with these as well.
 
+To follow along hands-on, you need
+* laptop or desktop with internet access.
+* a system set up so you can connect to an HPC system, an account on an HPC
+  system (e.g., VSC, CECI, ...), compute credits if that is required to run
+  jobs on the HPC system if you want to use an HPC system;
+* a Python environment that can run Jupyter Lab if you want to use your own system;
+* access to Google Colaboratory if you prefer not to install software.
+
 
 ## Level
 

@@ -1,10 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env -S bash -l
 
-source "${VSC_DATA}/miniconda3/setenv.sh"
-source activate science 2> /dev/null
-if [ $? -ne 0 ]
-then
-    (>&2 echo '### error: conda environment not sourced correctly' )
-fi
+source ~/.mamba_init.sh
+mamba activate python_for_hpc
 
 nohup dask-scheduler &> "scheduler-${PBS_JOBID}.log" &

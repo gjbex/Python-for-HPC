@@ -1,3 +1,7 @@
 *.pyc
 _ising_cxx.so
 ising_cxx.py
+
+result-domains.txt
+result-magn.txt
+

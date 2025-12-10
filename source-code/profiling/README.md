@@ -22,5 +22,3 @@ functions use memory.
 1. `run_memory_prof.sh`: Bash shell script to create a memory profile.
     Note that this generates a lot of overhead in terms of CPU time.
 1. `cellular_automata.py`: example code to illustrate snakeviz.
-1. `microbenchmarking.ipynb`: some pitfalls when microbenchmarking
-    Python code.

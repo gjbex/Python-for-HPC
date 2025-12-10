@@ -10,6 +10,7 @@ CSV or HDF5 files.
 * `create_csv_data.py`: non-Dask script to generate a large CSV data set for
     experimenting with Dask.
 * `create_csv_data.pbs`: PBS script to run `create_csv_data.py`.
+* `create_csv_data.slurm`: Slurm script to run `create_csv_data.py`.
 * `dask_avg_csv.py`: Dask computation of the average value of columns in
     a large number of CSV files.
 * `dask_avg_csv.pbs`: PBS script to run `dask_avg_csv.py`.
@@ -26,6 +27,8 @@ CSV or HDF5 files.
 * `dask_distr_test.py`: script to perform a trivial computation using
     futures in a distributed setting.
 * `dask_distr_test.pbs`: PBS script that will launch a scheduler, workers,
+    and run the `dask_distr_test.py` script.
+* `dask_distr_test.slurm`: Slurm script that will launch a scheduler, workers,
     and run the `dask_distr_test.py` script.
 * `dask_sum_aarays.py`: somewhat artificial example of a Dask computation
     on `numpy` arrays.

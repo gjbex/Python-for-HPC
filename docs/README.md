@@ -21,20 +21,21 @@ When you complete this training you will
 
 ## Schedule
 
-Total duration: 8 hours.
+Total duration: 4 hours.
 
-  | Subject                                     |  Duration |
-  |---------------------------------------------|-----------|
-  | introduction and motivation                 |   5 min.  |
-  | performance and profiling                   |  25 min.  |
-  | libraries                                   |  10 min.  |
-  | Cython                                      |  90 min.  |
-  | interfacing with C/C++/Fortran              |  60 min.  |
-  | multi-threaded programming                  |  60 min.  |
-  | MPI                                         | 120 min.  |
-  | dask                                        |  30 min.  |
-  | pyspark                                     |  20 min.  |
-  | wrap up                                     |  10 min.  |
+  | Subject                                     | Duration |
+  |---------------------------------------------|----------|
+  | introduction and motivation                 |  5 min.  |
+  | performance and profiling                   | 25 min.  |
+  | libraries                                   | 10 min.  |
+  | Cython                                      | 60 min.  |
+  | coffee break                                | 10 min.  |
+  | interfacing with C/C++/Fortran              | 30 min.  |
+  | multi-threaded programming                   | 10 min.  |
+  | MPI                                         | 45 min.  |
+  | dask                                        | 15 min.  |
+  | pyspark                                     | 20 min.  |
+  | wrap up                                     | 10 min.  |
 
 
 ## Training materials
@@ -63,13 +64,6 @@ familiarity with C/C++.  This is not a training that starts from scratch.
 
 If you plan to do Python programming in a Linux or HPC environment you should
 be familiar with these as well.
-
-
-## Level
-
-* Introductory: 10 %
-* Intermeidate: 30 %
-* Advanced: 60 %
 
 
 ## Trainer(s)

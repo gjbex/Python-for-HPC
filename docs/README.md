@@ -21,21 +21,21 @@ When you complete this training you will
 
 ## Schedule
 
-Total duration: 4 hours.
+Total duration: 8 hours.
 
   | Subject                                     | Duration |
   |---------------------------------------------|----------|
   | introduction and motivation                 |  5 min.  |
-  | performance and profiling                   | 25 min.  |
+  | performance and profiling                   | 45 min.  |
   | libraries                                   | 10 min.  |
-  | Cython                                      | 60 min.  |
-  | coffee break                                | 10 min.  |
+  | Numba                                       | 60 min.  |
+  | Cython                                      | 90 min.  |
   | interfacing with C/C++/Fortran              | 30 min.  |
-  | multi-threaded programming                   | 10 min.  |
+  | multi-threaded programming                  | 60 min.  |
   | MPI                                         | 45 min.  |
-  | dask                                        | 15 min.  |
-  | pyspark                                     | 20 min.  |
-  | wrap up                                     | 10 min.  |
+  | dask                                        | 45 min.  |
+  | pyspark                                     | 45 min.  |
+  | wrap up                                     | 15 min.  |
 
 
 ## Training materials
@@ -64,6 +64,21 @@ familiarity with C/C++.  This is not a training that starts from scratch.
 
 If you plan to do Python programming in a Linux or HPC environment you should
 be familiar with these as well.
+
+For following along hands-on, you need
+* laptop or desktop with internet access.
+* a system set up so you can connect to an HPC system, an account on an HPC
+  system (e.g., VSC, CECI, ...), compute credits if that is required to run
+  jobs on the HPC system if you want to use an HPC system;
+* a Python environment that can run Jupyter Lab if you want to use your own system;
+* access to Google Colaboratory if you prefer not to install software.
+
+
+## Level
+
+* Introductory: 10 %
+* Intermediate: 40 %
+* Advanced: 50 %
 
 
 ## Trainer(s)

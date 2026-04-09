@@ -65,6 +65,58 @@ familiarity with C/C++.  This is not a training that starts from scratch.
 If you plan to do Python programming in a Linux or HPC environment you should
 be familiar with these as well.
 
+More concretely, participants should already be comfortable with the following:
+
+* running Python code in Jupyter or from the command line;
+* variables, numbers, strings, booleans, and basic containers such as lists,
+  tuples, sets, and dictionaries;
+* `if`/`else` statements, `for` loops, comprehensions, and writing functions
+  with arguments and return values;
+* importing modules and reading short Python scripts without needing every line
+  explained;
+* solid NumPy basics such as array creation, slicing, reshaping,
+  broadcasting, vectorized computations, and reductions;
+* basic scientific-computing patterns such as timing code, reasoning about
+  array shapes, and understanding why vectorized array code can outperform
+  explicit Python loops;
+* basic file handling and command-line scripting;
+* basic familiarity with Linux or HPC workflows, for example running scripts
+  on a remote system, editing files in a shell environment, and understanding
+  batch jobs at a high level;
+* a rough idea of what C or C++ code looks like, so that interfacing examples
+  are not completely unfamiliar.
+
+You do not need prior experience with profiling tools, Numba, Cython,
+`mpi4py`, Dask, PySpark, HDF5, SWIG, `ctypes`, `f2py`, or writing extension
+modules in C/C++/Fortran. Those are part of the training itself.
+
+### Quick self-assessment
+
+If you can do most of the tasks below without looking up basic Python syntax,
+you are likely ready for this training.
+
+* create a NumPy array, reshape or slice it, and compute a reduction such as a
+  sum or mean;
+* explain at a high level why a vectorized NumPy expression can be faster than
+  a Python loop over elements;
+* read a short script that times a numerical computation and understand what is
+  being measured;
+* write a function that processes a NumPy array and returns another array or a
+  scalar result;
+* run a Python script from the command line with one or two arguments and
+  interpret the output;
+* read a short traceback or runtime error and identify roughly where the
+  problem occurred;
+* make a small change to an example script or notebook and run it again;
+* read a small piece of C or C++ code and at least recognize concepts such as
+  loops, variables, and function calls;
+* understand the basic idea of running work on multiple cores or multiple
+  processes, even if you have not implemented that yourself.
+
+If several of these items still feel difficult, the training will probably move
+too fast. In that case, it is better to first refresh Python and NumPy, and if
+necessary take a short introduction to Linux/HPC workflows.
+
 For following along hands-on, you need
 * laptop or desktop with internet access.
 * a system set up so you can connect to an HPC system, an account on an HPC
@@ -74,11 +126,16 @@ For following along hands-on, you need
 * access to Google Colaboratory if you prefer not to install software.
 
 
-## Level
+## Level of the Material
 
-* Introductory: 10 %
-* Intermediate: 40 %
-* Advanced: 50 %
+For participants who already have solid Python and NumPy experience, the material in this training is approximately
+
+* Introductory: 5 %
+* Intermediate: 30 %
+* Advanced: 65 %
+
+These percentages describe the level of the HPC and performance-engineering
+topics covered in the training, not the required entry level in Python itself.
 
 
 ## Trainer(s)

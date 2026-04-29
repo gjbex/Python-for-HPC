@@ -117,6 +117,8 @@ If several of these items still feel difficult, the training will probably move
 too fast. In that case, it is better to first refresh Python and NumPy, and if
 necessary take a short introduction to Linux/HPC workflows.
 
+### Software and access requirements
+
 For following along hands-on, you need
 * laptop or desktop with internet access.
 * a system set up so you can connect to an HPC system, an account on an HPC

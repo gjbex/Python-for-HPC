@@ -1,0 +1,164 @@
+schema_version = 2
+id = "python-for-hpc"
+title = "Python for HPC"
+content_language = "en"
+summary = """
+Although vanilla Python is fairly slow and hence not a good candidate, there are several options to significantly increase the efficiency of Python programs.
+"""
+languages = ["Python"]
+
+[[learning_outcomes]]
+statement = "Understand and identify performance bottlenecks of Python."
+competencies = ["python-performance.identify-bottlenecks"]
+
+[[learning_outcomes]]
+statement = "Know some libraries that can help improve performance for scientific computing such as numpy, numexpr and numba."
+competencies = ["python-performance.use-accelerating-array-libraries"]
+
+[[learning_outcomes]]
+statement = "Be able to use Cython to improve your code's performance."
+competencies = ["python-performance.compile-with-cython"]
+
+[[learning_outcomes]]
+statement = "Be able to wrap C, C++ and Fortran code to use it from Python."
+competencies = ["python-performance.interoperate-with-native-code"]
+
+[[learning_outcomes]]
+statement = "Understand the opportunities and pitfalls of multi-threaded programming with Python."
+competencies = ["python-performance.reason-about-multithreading"]
+
+[[learning_outcomes]]
+statement = "Be able to write distributed application using MPI."
+competencies = ["python-performance.distributed-applications-with-mpi"]
+
+[[learning_outcomes]]
+statement = "Have an understanding of how frameworks for distributed computing such as dask and pyspark work."
+competencies = ["distributed-computing.reason-about-data-processing-frameworks"]
+
+[source]
+metadata_document = "docs/README.md"
+repository_url = "https://github.com/gjbex/Python-for-HPC/"
+website_url = "https://gjbex.github.io/Python-for-HPC/"
+license = "CC-BY-4.0"
+
+[delivery]
+duration_minutes = 480
+duration_kind = "fixed"
+session_count = 1
+target_session_duration_minutes = 480
+schedule_complete = true
+description = """
+Total duration: 8 hours.
+"""
+
+[audience]
+description = """
+This training is for you if you need to use Python for computationally intensive scientific computing.
+"""
+
+[prerequisites]
+summary = """
+You will need experience programming in Python, using numpy, and have a passing familiarity with C/C++. This is not a training that starts from scratch. If you plan to do Python programming in a Linux or HPC environment you should be familiar with these as well. More concretely, participants should already be comfortable with the following: * running Python code in Jupyter or from the command line; * variables, numbers, strings, booleans, and basic containers such as lists, tuples, sets, and dictionaries; * `if`/`else` statements, `for` loops, comprehensions, and writing functions with arguments and return values; * importing modules and reading short Python scripts without needing every line explained; * solid NumPy basics such as array creation, slicing, reshaping, broadcasting, vectorized computations, and reductions; * basic scientific-computing patterns such as timing code, reasoning about array shapes, and understanding why vectorized array code can outperform explicit Python loops; * basic file handling and command-line scripting; * basic familiarity with Linux or HPC workflows, for example running scripts on a remote system, editing files in a shell environment, and understanding batch jobs at a high level; * a rough idea of what C or C++ code looks like, so that interfacing examples are not completely unfamiliar. You do not need prior experience with profiling tools, Numba, Cython, `mpi4py`, Dask, PySpark, HDF5, SWIG, `ctypes`, `f2py`, or writing extension modules in C/C++/Fortran. Those are part of the training itself.
+"""
+competencies = ["python.run-code", "python.values-and-containers", "python.control-flow-and-comprehensions", "python.functions", "python.import-modules", "numpy.create-slice-and-reshape-arrays", "numpy.vectorized-computations", "numpy.broadcasting", "numpy.reductions", "performance.measure-execution-time", "command-line.run-or-compile-programs", "hpc.understand-batch-jobs"]
+
+[self_assessment]
+introduction = """
+If you can do most of the tasks below without looking up basic Python syntax, you are likely ready for this training.
+"""
+tasks = [
+  "Create a NumPy array, reshape or slice it, and compute a reduction such as a sum or mean.",
+  "Explain at a high level why a vectorized NumPy expression can be faster than a Python loop over elements.",
+  "Read a short script that times a numerical computation and understand what is being measured.",
+  "Write a function that processes a NumPy array and returns another array or a scalar result.",
+  "Run a Python script from the command line with one or two arguments and interpret the output.",
+  "Read a short traceback or runtime error and identify roughly where the problem occurred.",
+  "Make a small change to an example script or notebook and run it again.",
+  "Read a small piece of C or C++ code and at least recognize concepts such as loops, variables, and function calls.",
+  "Understand the basic idea of running work on multiple cores or multiple processes, even if you have not implemented that yourself."
+]
+
+[requirements]
+software = [
+  "Laptop or desktop with internet access.",
+  "A system set up so you can connect to an HPC system, an account on an HPC system (e.g., VSC, CECI, ...), compute credits if that is required to run jobs on the HPC system if you want to use an HPC system.",
+  "A Python environment that can run Jupyter Lab if you want to use your own system.",
+  "Access to Google Colaboratory if you prefer not to install software."
+]
+
+[level]
+introductory_percent = 5
+intermediate_percent = 30
+advanced_percent = 65
+description = """
+For participants who already have solid Python and NumPy experience, the material in this training is approximately These percentages describe the level of the HPC and performance-engineering topics covered in the training, not the required entry level in Python itself.
+"""
+
+[[materials]]
+kind = "slides"
+path = "python_for_hpc.pptx"
+
+[[materials]]
+kind = "source-code"
+path = "source-code"
+
+[[materials]]
+kind = "environment"
+path = "environment.yml"
+
+[[trainers]]
+name = "Geert Jan Bex"
+email = "geertjan.bex@uhasselt.be"
+
+[[maintainers]]
+name = "Geert Jan Bex"
+email = "geertjan.bex@uhasselt.be"
+
+[[sessions]]
+id = "session-1"
+title = "Session one"
+duration_minutes = 480
+
+[[sessions.items]]
+subject = "introduction and motivation"
+duration_minutes = 5
+
+[[sessions.items]]
+subject = "performance and profiling"
+duration_minutes = 45
+
+[[sessions.items]]
+subject = "libraries"
+duration_minutes = 10
+
+[[sessions.items]]
+subject = "Numba"
+duration_minutes = 60
+
+[[sessions.items]]
+subject = "Cython"
+duration_minutes = 90
+
+[[sessions.items]]
+subject = "interfacing with C/C++/Fortran"
+duration_minutes = 30
+
+[[sessions.items]]
+subject = "multi-threaded programming"
+duration_minutes = 60
+
+[[sessions.items]]
+subject = "MPI"
+duration_minutes = 45
+
+[[sessions.items]]
+subject = "dask"
+duration_minutes = 45
+
+[[sessions.items]]
+subject = "pyspark"
+duration_minutes = 45
+
+[[sessions.items]]
+subject = "wrap up"
+duration_minutes = 15

@@ -1,3 +1,6 @@
+# Codegraph directory
+.codegraph/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
